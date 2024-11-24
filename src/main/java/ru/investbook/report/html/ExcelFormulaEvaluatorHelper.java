@@ -60,7 +60,7 @@ class ExcelFormulaEvaluatorHelper {
     /**
      * Если формула соответствует шаблону '{A}IFERROR({B},{default-value}){C}', то будет попытка вычислить значение '{A}{default-value}{C}'
      */
-    private static boolean handleNotImplementedException(Cell c, HSSFFormulaEvaluator evaluator) {
+    static boolean handleNotImplementedException(Cell c, HSSFFormulaEvaluator evaluator) {
         try {
             String formula = c.getCellFormula();
             int ifErrorFuncStartPos = formula.toUpperCase().indexOf("IFERROR(");
@@ -83,7 +83,7 @@ class ExcelFormulaEvaluatorHelper {
         return false;
     }
 
-    private static int indexOfCloseBrace(String formula, int openBracePos) {
+    static int indexOfCloseBrace(String formula, int openBracePos) {
         Assert.isTrue(formula.charAt(openBracePos) == '(', "Open brace expected");
         int braceCnt = 1;
         for (int i = openBracePos + 1; i < formula.length(); i++) {
@@ -100,7 +100,7 @@ class ExcelFormulaEvaluatorHelper {
         return -1;
     }
 
-    private static int indexOfSecondArg(String formula, int openBracePos) {
+    static int indexOfSecondArg(String formula, int openBracePos) {
         Assert.isTrue(formula.charAt(openBracePos) == '(', "Open brace expected");
         int braceCnt = 0;
         for (int i = openBracePos + 1; i < formula.length(); i++) {
